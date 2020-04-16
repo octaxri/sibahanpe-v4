@@ -703,19 +703,29 @@ require_once("part/footer.php");
     var tgl = "<?php echo date('d-m-Y')?>";
     //var tgl = "09-04-2020";
     var ada = "";
+    var tidak_absen ="";
     $.each(hari_ini,function(a,b){
       console.log(b.total_telat + b.tgl)
       if(b.tgl==tgl)
-      {
+      {        
         ada = b.total_telat;
       }
+
+      if(b.masuk==null && b.pulang==null)
+      {
+          tidak_absen="benar";
+      }
+
     })
 
-    if(ada=="0")
+    if(ada=="0" && tidak_absen=="")
     {
       var info_telat = '<div style="padding: 20px 30px;  z-index: 999999; font-size: 16px; font-weight: 600; color:#fff" class="alert alert-success">Hello <?php echo $this->session->userdata('NAMA')?>... Selamat,  Kamu tidak telat hari ini. </div>';
     }else if(ada==""){
       var info_telat = '<div style="padding: 20px 30px;  z-index: 999999; font-size: 16px; font-weight: 600; color:#fff" class="alert alert-danger">Hello <?php echo $this->session->userdata('NAMA')?>... Sepertinya hari ini Kamu belum absensi... </div>';
+    }else if(ada=="0" && tidak_absen=="benar"){
+      var info_telat = '<div style="padding: 20px 30px;  z-index: 999999; font-size: 16px; font-weight: 600; color:#fff" class="alert alert-danger">Hello <?php echo $this->session->userdata('NAMA')?>... Sepertinya hari ini Kamu belum absensi... </div>';
+
     }else{
       var info_telat = '<div style="padding: 20px 30px;  z-index: 999999; font-size: 16px; font-weight: 600; color:#fff" class="alert alert-warning">Hello <?php echo $this->session->userdata('NAMA')?>...  Kamu sepertinya telat '+ada+' menit hari ini... </div>';
     }

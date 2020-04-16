@@ -12,7 +12,7 @@ table tr td, th  {
 </style>
 			
 			
-			
+		
           <table width="100%">
 			<tr>
 				<td width="15%">
@@ -38,7 +38,7 @@ table tr td, th  {
 			<div class="text-center" style="font-weight:bold;">
 				REKAPITULASI TAMBAHAN PENGHASILAN PEGAWAI (TPP)<br>
 				<?php echo $info->OPD?><br>
-						UNTUK BULAN <?php echo strtoupper(blnindo($bulan))?> TA.<?php echo $tahun?>
+						UNTUK BULAN <?php echo strtoupper(($bulan))?> TA.<?php echo $tahun?>
 						
 			</div>
 			<br>

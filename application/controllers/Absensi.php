@@ -837,8 +837,9 @@ class Absensi extends CI_Controller {
 		 
 		if (file_exists($pdfFilePath) == FALSE)
 		{
-			ini_set('memory_limit', '-1');
-			ini_set('memory_limit','32M'); // boost the memory limit if it's low <img class="emoji" draggable="false" alt="" src="https://s.w.org/images/core/emoji/72x72/1f609.png">
+			ini_set('memory_limit', '2048M');
+			//ini_set('memory_limit', '-1');
+			//ini_set('memory_limit','32M'); // boost the memory limit if it's low <img class="emoji" draggable="false" alt="" src="https://s.w.org/images/core/emoji/72x72/1f609.png">
 			//$html = $this->load->view('laporan_mpdf/pdf_report', $data, true); // render the view into HTML
 			$html = $this->load->view('template/part/print_absen_by_nik.php',$data,true);
 			 

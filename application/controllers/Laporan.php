@@ -36,6 +36,7 @@ class Laporan extends CI_Controller {
 	private function log_firebase()
 	{
 		/******************** post ke firebase ************************/
+		/*
 		$array_to_firebase = array(					
 					"server"=>$_SERVER['SERVER_ADDR'],
 					"client"=>getenv("REMOTE_ADDR"),
@@ -47,6 +48,7 @@ class Laporan extends CI_Controller {
 					"post"=>$this->input->post()
 				);      	
       	post_ke_firebase('https://sibahanpe.firebaseio.com/tbl_aktivitas.json',$array_to_firebase);
+      	*/
 		/******************** post ke firebase ************************/
 	}
 	
@@ -130,6 +132,7 @@ class Laporan extends CI_Controller {
 		{
 			//ini_set('memory_limit','512M'); // boost the memory limit if it's low <img class="emoji" draggable="false" alt="" src="https://s.w.org/images/core/emoji/72x72/1f609.png">
         	ini_set('memory_limit', '2048M');
+        	//ini_set('memory_limit', '-1');
 			//$html = $this->load->view('laporan_mpdf/pdf_report', $data, true); // render the view into HTML
 			$html = $this->load->view('template/part/laporan_pdf.php',$data,true);
 			 
@@ -175,7 +178,7 @@ class Laporan extends CI_Controller {
 		
 		
 		//var_dump($staff_arr);
-		$filename = str_replace(" ","_",$data['OPD'])."_".date('d_m_y_h_i_s');
+		$filename = str_replace(" ","_",$data['OPD'])."_".date('d_m_y_h_i_s')."_rekap.xls";;
 		
 		
 		$data['page_title'] = 'TPP BULAN '.$bulan.' TAHUN '. date('Y'); // pass data to the view
