@@ -26,7 +26,7 @@ date_default_timezone_set('Asia/Jakarta');
 //$config['base_url'] = 'http://202.46.1.36/absensi';
 //$config['base_url'] = 'http://localhost/sibahanpe/';
 //$config['base_url'] = 'http://192.168.30.34/e-agenda/';
-$config['base_url'] = 'http://localhost/sibahanpe/';
+$config['base_url'] = 'http://localhost/sibahanpe-v4/';
 
 /*
 |--------------------------------------------------------------------------

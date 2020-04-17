@@ -37,13 +37,13 @@
 	52px 52px 0px 0px #ffbb00;
 }
 </style>
-<body style="">
+<body style="background: #bbe2fa">
 	<div class="ui page grid">
 		<div class="sixteen wide mobile two wide tablet two wide computer column"></div>
 		<div class="sixteen wide mobile twelve wide tablet twelve wide computer column">
 			<div class="ui segment">
 				<div class="ui stackable two column grid">
-					<div class="green center aligned column">
+					<div class="blue center aligned column">
 						<h2 class="ui blue inverted center aligned icon header">
 							<img src="//www.pakpakbharatkab.go.id/imej/pakpaklogo.png" class="ui image">
 							<div class="content">
@@ -56,7 +56,7 @@
 						</h2>
 					</div>
 					<div class="column">
-						<a class="ui red right ribbon label">
+						<a class="ui orange right ribbon label">
 							<h3>Login User</h3>
 						</a>
 						<div class="ui basic segment">
@@ -83,7 +83,7 @@
 								</div>
 								<div class="ui one column grid">
 									<div class="right aligned column">
-										<button type="submit" class="ui green small icon labeled button">Login</button>
+										<button type="submit" class="ui blue small icon labeled button">Login</button>
 									</div>
                                 <!--
 								<div class="column">
@@ -101,9 +101,12 @@
 	</div>
 	<div class="ui secondary right aligned segment">
 		<div align="left">
-			<a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#tentang">Tentang</a> <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#panduan">Panduan</a> <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#faq">FAQ</a> <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#kontak">Kontak</a>
+			<a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#tentang">Tentang</a> 
+			<a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#panduan">Panduan</a> 
+			<a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#faq">FAQ</a> 
+			<a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#kontak">Kontak</a>
 		</div>
-		<strong>© 2018 - Diskominfo</strong><br><small>Dinas Komunikasi dan Informatika Kab. Pakpak Bharat</small>
+		<strong>Sibahanpe v4.0.0 © 2017 - <?php echo date('Y')?> Diskominfo</strong><br><small>Dinas Komunikasi dan Informatika Kab. Pakpak Bharat</small>
 	</div>
 </div>
 </div>
