@@ -130,7 +130,10 @@ class Getbynik extends CI_Controller {
 	
 	public function api_absen_by_nik()
 	{
-		
+		header("Access-Control-Allow-Origin: *");
+		header("Access-Control-Allow-Headers: *");
+		header('Content-Type: application/json');
+		ini_set('memory_limit', '2048M');
 		$nik = $this->input->get('nik', TRUE);
 		$bulan = $this->input->get('bulan', TRUE);
 		$tahun = $this->input->get('tahun', TRUE);
@@ -178,12 +181,15 @@ class Getbynik extends CI_Controller {
 	
 	public function go_sinkron()
 	{
-		
+		header("Access-Control-Allow-Origin: *");
+		header("Access-Control-Allow-Headers: *");
+		header('Content-Type: application/json');
+		ini_set('memory_limit', '2048M');
 		$bulan = $this->input->get('bulan');
 		$tahun = $this->input->get('tahun');
 		$nip = $this->input->get('nip');
 
-		
+
 		$url_ekinerja = "https://ekinerja.pakpakbharatkab.go.id/res/get_json_hasil.php";		
 		//ambil_data dari e kinerja
 		$ekinerja = json_decode(exec_url($url_ekinerja."?menu=laporan_bulanan&judul=Laporan%20Bulanan&aksi=cari&bulan=$bulan&keywords=$tahun&nip=$nip"));
@@ -213,7 +219,7 @@ class Getbynik extends CI_Controller {
 					"pokok"=>$hasil->tpp_full
 					);		
 		$this->db->insert('tbl_hasil_absen',$ser_absensi);
-		
+		echo json_encode(array("msg"=>"ok"));
 		
 	}
 }

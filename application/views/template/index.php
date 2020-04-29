@@ -120,7 +120,8 @@ include("part/menu_kiri.php");
             </div>
             <!-- /.box-body -->
             <div class="box-footer text-center">
-              
+              <div id="info_sinkron"></div>
+              <button class="btn btn-info btn-block" onclick="sinkron_ekinnya($(this))"><span class="glyphicon glyphicon-refresh"></span> Sinkon Ekinerja</button>
             </div>
             <!-- /.box-footer -->
           </div>
@@ -689,7 +690,33 @@ require_once("part/footer.php");
 
 
 <script type="text/javascript">
-  $.get("<?php echo base_url()?>index.php/getbynik/api_absen_by_nik?nik=<?php echo($this->session->userdata('NIK'))?>&bulan=<?php echo date('m')?>&tahun=<?php echo(date('Y'))?>",function(x){
+function sinkron_ekinnya(ini)
+{
+  var url = "<?php echo base_url()?>index.php/getbynik/go_sinkron?nip=<?php echo($this->session->userdata('NIK'))?>&bulan=<?php echo(date('m'))?>&tahun=<?php echo(date('Y'))?>";
+  console.log(url);
+  ini.html("Loading...");
+  ini.attr("disabled", true);
+  $.ajax({
+      url: url,
+      async:true,
+      crossDomain:true, 
+      error: function(e){
+          console.log(e);
+      },
+      success: function(){
+          info_tpp();
+          $("#info_sinkron").html("<div class='alert alert-success' style='padding:5px'><span class='glyphicon glyphicon-ok'> </span> Sukses!!</div>");    
+          ini.hide();
+      },
+      timeout: 100000 // sets timeout to 3 seconds
+  });
+  
+}
+
+info_tpp();
+function info_tpp()
+{
+   $.get("<?php echo base_url()?>index.php/getbynik/api_absen_by_nik?nik=<?php echo($this->session->userdata('NIK'))?>&bulan=<?php echo date('m')?>&tahun=<?php echo(date('Y'))?>",function(x){
     console.log(x[0]);
     var htm = '<ul class="products-list product-list-in-box">'+
                 '<li class="item"><a>Pokok </a> <span class="label label-primary pull-right">Rp.'+x[0].pokok+'</span> </li>'+
@@ -732,4 +759,7 @@ require_once("part/footer.php");
 
     $("#info_telat").html(info_telat);
   })
+}
+
+ 
 </script>
