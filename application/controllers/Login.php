@@ -54,7 +54,7 @@ class Login extends CI_Controller {
 						foreach($qqq->result() as $a)			
 						{
 									
-									
+
 							$sess_data['NIK'] 		= $NIK;
 							$sess_data['FID'] 		= $a->FID;
 							$sess_data['ESELON'] 	= $a->eselon;
@@ -335,6 +335,8 @@ class Login extends CI_Controller {
         
         $this->load->helper('cookie');
         delete_cookie($_COOKIE['nip']);
+        unset($_COOKIE[$cookie]);
+		setcookie("nip", "", 0, "/",".pakpakbharatkab.go.id");
 		redirect('index.php/login');
 		//redirect('http://ujicoba.pakpakbharatkab.go.id/sso/login/logout');
         
