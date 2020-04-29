@@ -207,7 +207,7 @@ class Getbynik extends CI_Controller {
 		$this->db->insert('tbl_hasil_ekin',$ser_ekin);
 
 
-		$url_absensi = "http://localhost/sibahanpe-v4/index.php/getbynik/api_absen_by_nik?nik=$nip&bulan=$bulan&tahun=$tahun";
+		$url_absensi = base_url()."index.php/getbynik/api_absen_by_nik?nik=$nip&bulan=$bulan&tahun=$tahun";
 		$absensi = json_decode(exec_url($url_absensi));
 		$ser_absensi = array(
 					"nip"=>$nip,
