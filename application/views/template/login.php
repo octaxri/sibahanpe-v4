@@ -37,7 +37,7 @@
 	52px 52px 0px 0px #ffbb00;
 }
 </style>
-<body style="background: #bbe2fa">
+<body style="">
 	<div class="ui page grid">
 		<div class="sixteen wide mobile two wide tablet two wide computer column"></div>
 		<div class="sixteen wide mobile twelve wide tablet twelve wide computer column">

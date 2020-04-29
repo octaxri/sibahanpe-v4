@@ -208,7 +208,7 @@
 							if (in_array($tanggal_get, $d_ijin_la)) 
 							{
 								/********** ijin hanya sebelah masuk atau pulang **************/
-								$yyy = $this->db->query("SELECT masuk_pulang FROM tbl_surat_ijin_keterangan WHERE NIK='$data->Nik' AND status='approve' AND tanggal='$tanggal_get'");
+								$yyy = $this->db->query("SELECT masuk_pulang FROM tbl_surat_ijin_keterangan WHERE NIK='$nik' AND status='approve' AND tanggal='$tanggal_get'");
 								foreach ($yyy->result() as $o) {
 								
 									$note		="keterangan";
