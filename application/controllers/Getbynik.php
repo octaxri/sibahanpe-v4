@@ -11,6 +11,7 @@ class Getbynik extends CI_Controller {
 		$this->load->database();
 		$this->load->helper('url');		
 		$this->load->model('m_absensi');
+		$this->load->model('m_laporan');
 		$this->load->helper('custom_func');
 		
 		$this->load->helper('text');
@@ -40,8 +41,27 @@ class Getbynik extends CI_Controller {
     	$data['tgl_cut_tah']=$this->m_absensi->m_tbl_cuti_tahunan($nik,$bulan,$tahun);
 		$data['tbl_surat_ijin_keterangan']=$this->m_absensi->m_tbl_surat_ijin_keterangan($nik,$bulan,$tahun);
 
-		//ambil_data dari e kinerja
-		$data['ekinerja'] = json_decode(exec_url("https://ekinerja.pakpakbharatkab.go.id/res/get_json_hasil.php?menu=laporan_bulanan&judul=Laporan%20Bulanan&aksi=cari&bulan=$bulan&keywords=$tahun&nip=$nik"));
+		
+		//$data['ekinerja'] = json_decode(exec_url("https://ekinerja.pakpakbharatkab.go.id/res/get_json_hasil.php?menu=laporan_bulanan&judul=Laporan%20Bulanan&aksi=cari&bulan=$bulan&keywords=$tahun&nip=$nik"));
+
+
+		/********** sekarang tarik dari db aja *********/
+		$ekinerja = new stdClass();
+		$ekinerja->ekinerja = new stdClass();		
+		$q = $this->m_laporan->m_hasil_ekin($nik,$bulan,$tahun);				
+		if(count($q)==0)
+		{
+			$ekinerja->ekinerja->tpp_full=0;
+			$ekinerja->ekinerja->tpp_dasar=0;
+			$ekinerja->ekinerja->tpp_dapat=0;
+		}else{
+			$ekinerja->ekinerja->tpp_full=$q[0]->tpp_full;
+			$ekinerja->ekinerja->tpp_dasar=$q[0]->tpp_dasar;
+			$ekinerja->ekinerja->tpp_dapat=$q[0]->tpp_dapat;
+		}
+		$data['ekinerja'] = $ekinerja;
+		/********** sekarang tarik dari db aja *********/
+		
 		
 		
 		$data['bulan'] = $bulan;
@@ -75,10 +95,30 @@ class Getbynik extends CI_Controller {
 		$data['tgl_dinas']=$this->m_absensi->m_tbl_dinas_luar($nik,$bulan);
 		$data['tgl_cut_sak']=$this->m_absensi->m_tbl_cuti_sakit($nik,$bulan);
 		$data['tgl_cut_la']=$this->m_absensi->m_tbl_cuti_lain($nik,$bulan);
-    $data['tgl_cut_tah']=$this->m_absensi->m_tbl_cuti_tahunan($nik,$bulan);
+    	$data['tgl_cut_tah']=$this->m_absensi->m_tbl_cuti_tahunan($nik,$bulan);
 		$data['tbl_surat_ijin_keterangan']=$this->m_absensi->m_tbl_surat_ijin_keterangan($nik,$bulan);
-		//ambil_data dari e kinerja
-		$data['ekinerja'] = json_decode(exec_url("https://ekinerja.pakpakbharatkab.go.id/res/get_json_hasil2.php?menu=laporan_bulanan&judul=Laporan%20Bulanan&aksi=cari&bulan=$bulan&keywords=$tahun&nip=$nik"));
+		
+
+
+		//$data['ekinerja'] = json_decode(exec_url("https://ekinerja.pakpakbharatkab.go.id/res/get_json_hasil2.php?menu=laporan_bulanan&judul=Laporan%20Bulanan&aksi=cari&bulan=$bulan&keywords=$tahun&nip=$nik"));
+
+		/********** sekarang tarik dari db aja *********/
+		$ekinerja = new stdClass();
+		$ekinerja->ekinerja = new stdClass();		
+		$q = $this->m_laporan->m_hasil_ekin($nik,$bulan,$tahun);				
+		if(count($q)==0)
+		{
+			$ekinerja->ekinerja->tpp_full=0;
+			$ekinerja->ekinerja->tpp_dasar=0;
+			$ekinerja->ekinerja->tpp_dapat=0;
+		}else{
+			$ekinerja->ekinerja->tpp_full=$q[0]->tpp_full;
+			$ekinerja->ekinerja->tpp_dasar=$q[0]->tpp_dasar;
+			$ekinerja->ekinerja->tpp_dapat=$q[0]->tpp_dapat;
+		}
+		$data['ekinerja'] = $ekinerja;
+		/********** sekarang tarik dari db aja *********/
+		
 		
 		
 		$data['bulan'] = $bulan;
@@ -108,8 +148,27 @@ class Getbynik extends CI_Controller {
     	$data['tgl_cut_tah']=$this->m_absensi->m_tbl_cuti_tahunan($nik,$bulan,$tahun);
 		$data['tbl_surat_ijin_keterangan']=$this->m_absensi->m_tbl_surat_ijin_keterangan($nik,$bulan,$tahun);
 		
-		//ambil_data dari e kinerja
-		$data['ekinerja'] = json_decode(exec_url("https://ekinerja.pakpakbharatkab.go.id/res/get_json_hasil.php?menu=laporan_bulanan&judul=Laporan%20Bulanan&aksi=cari&bulan=$bulan&keywords=$tahun&nip=$nik"));
+		
+		/********** sekarang tarik dari db aja *********/
+		$ekinerja = new stdClass();
+		$ekinerja->ekinerja = new stdClass();		
+		$q = $this->m_laporan->m_hasil_ekin($nik,$bulan,$tahun);				
+		if(count($q)==0)
+		{
+			$ekinerja->ekinerja->tpp_full=0;
+			$ekinerja->ekinerja->tpp_dasar=0;
+			$ekinerja->ekinerja->tpp_dapat=0;
+		}else{
+			$ekinerja->ekinerja->tpp_full=$q[0]->tpp_full;
+			$ekinerja->ekinerja->tpp_dasar=$q[0]->tpp_dasar;
+			$ekinerja->ekinerja->tpp_dapat=$q[0]->tpp_dapat;
+		}
+		$data['ekinerja'] = $ekinerja;
+		/********** sekarang tarik dari db aja *********/
+
+		//$data['ekinerja'] = json_decode(exec_url("https://ekinerja.pakpakbharatkab.go.id/res/get_json_hasil.php?menu=laporan_bulanan&judul=Laporan%20Bulanan&aksi=cari&bulan=$bulan&keywords=$tahun&nip=$nik"));
+		
+		
 		
 		
 		$data['bulan'] = $bulan;
@@ -117,4 +176,44 @@ class Getbynik extends CI_Controller {
 	}
 	
 	
+	public function go_sinkron()
+	{
+		
+		$bulan = $this->input->get('bulan');
+		$tahun = $this->input->get('tahun');
+		$nip = $this->input->get('nip');
+
+		
+		$url_ekinerja = "https://ekinerja.pakpakbharatkab.go.id/res/get_json_hasil.php";		
+		//ambil_data dari e kinerja
+		$ekinerja = json_decode(exec_url($url_ekinerja."?menu=laporan_bulanan&judul=Laporan%20Bulanan&aksi=cari&bulan=$bulan&keywords=$tahun&nip=$nip"));
+
+		$hasil = $ekinerja->ekinerja;
+
+		$ser_ekin = array(
+					"nip"=>$nip,
+					"bulan"=>$bulan,
+					"tahun"=>$tahun,
+					"tpp_full"=>$hasil->tpp_full,
+					"tpp_dasar"=>round($hasil->tpp_dasar),
+					"tpp_dapat"=>round($hasil->tpp_dapat)					
+					);
+		$this->db->insert('tbl_hasil_ekin',$ser_ekin);
+
+
+		$url_absensi = "http://localhost/sibahanpe-v4/index.php/getbynik/api_absen_by_nik?nik=$nip&bulan=$bulan&tahun=$tahun";
+		$absensi = json_decode(exec_url($url_absensi));
+		$ser_absensi = array(
+					"nip"=>$nip,
+					"bulan"=>$bulan,
+					"tahun"=>$tahun,
+					"total_dapat"=>round($absensi[0]->total),
+					"dapat_ekin"=>round($hasil->tpp_dapat),
+					"dapat_absen"=>round($absensi[0]->total) - round($hasil->tpp_dapat),
+					"pokok"=>$hasil->tpp_full
+					);		
+		$this->db->insert('tbl_hasil_absen',$ser_absensi);
+		
+		
+	}
 }

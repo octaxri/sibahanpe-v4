@@ -196,6 +196,13 @@ if (in_array($this->session->userdata('NIK'), $admin)) {
 		
 		<hr>
 
+		<li>
+			<!--<a href="#" onclick="eksekusi_controller('index.php/laporan/staff_by_opd/<?php echo date('m')?>')">-->
+			<a href="#" onclick="eksekusi_controller('index.php/laporan/sinkronisasi')">
+				<i class="fa fa-folder"></i> <span>Sinkronisasi</span>            
+			</a>
+		 </li>
+		 
 		 
 		<li>
 			<!--<a href="#" onclick="eksekusi_controller('index.php/laporan/staff_by_opd/<?php echo date('m')?>')">-->
@@ -204,8 +211,6 @@ if (in_array($this->session->userdata('NIK'), $admin)) {
 			</a>
 		 </li>
 		 
-		<hr>
-		
 		
 		<li>
 			

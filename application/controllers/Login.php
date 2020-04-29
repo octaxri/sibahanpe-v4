@@ -54,6 +54,7 @@ class Login extends CI_Controller {
 						foreach($qqq->result() as $a)			
 						{
 									
+									
 							$sess_data['NIK'] 		= $NIK;
 							$sess_data['FID'] 		= $a->FID;
 							$sess_data['ESELON'] 	= $a->eselon;

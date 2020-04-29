@@ -66,7 +66,7 @@
 						
 						 
                 		
-                $arr_hukuman=array();
+                			$arr_hukuman=array();
 						
 						
 							foreach($hasil as $data)

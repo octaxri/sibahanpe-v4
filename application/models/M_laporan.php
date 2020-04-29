@@ -21,7 +21,30 @@
 		}
 		
 		
+		public function m_hasil_akhir($nip)
+		{
+			$q = $this->db->query("SELECT * FROM `tbl_hasil_absen` WHERE nip='$nip' ORDER BY id DESC LIMIT 1");
+			return $q->result();
+
+		}
+
 		
+
+		public function m_hasil_by_bulan_nip($nip,$bulan,$tahun)
+		{
+			$q = $this->db->query("SELECT * FROM `tbl_hasil_absen` WHERE nip='$nip' AND bulan=('$bulan')*1 AND tahun='$tahun' ORDER BY id DESC LIMIT 1");
+			return $q->result();
+
+		}
+
+
+
+		public function m_hasil_ekin($nip,$bulan,$tahun)
+		{
+			$q = $this->db->query("SELECT * FROM `tbl_hasil_ekin` WHERE nip='$nip' AND bulan=('$bulan')*1 AND tahun='$tahun' ORDER BY id DESC LIMIT 1");
+			return $q->result();
+
+		}
 
 
 		public function m_staff_by_opd() 
