@@ -707,6 +707,7 @@ function sinkron_ekinnya(ini)
           info_tpp();
           $("#info_sinkron").html("<div class='alert alert-success' style='padding:5px'><span class='glyphicon glyphicon-ok'> </span> Sukses!!</div>");    
           ini.hide();
+          info_tpp();
       },
       timeout: 100000 // sets timeout to 3 seconds
   });
