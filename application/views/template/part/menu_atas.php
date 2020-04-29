@@ -97,9 +97,9 @@
  <script>
 	function logout()
 	{
-			set_log('<?php echo $this->session->userdata('id_admin')?>', '<?php echo $this->session->userdata('username')?>', 'Logout admin', '<?php echo date('Y-m-d H:i:s')?>',function(){
+			
 				window.location.replace("<?php echo base_url()?>index.php/login/logout");
-			})
+			
 			
 			
 	}

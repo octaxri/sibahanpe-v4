@@ -260,7 +260,7 @@ $('.sidebar-menu a').on('click', function(e){
   </div>
   <script>
   $(document).ready(function(){
-  	$('#myModal_welcome').modal('show');
+  	//$('#myModal_welcome').modal('show');
 
   })
   </script>
