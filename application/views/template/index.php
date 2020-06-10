@@ -280,7 +280,7 @@ include("part/menu_kiri.php");
               
               
               //cek surat ijin lainnya 
-                            }else 
+              }else 
               //cek surat ijin lainnya 
               if (in_array($tanggal_get, $d_ijin_la)) 
               {
@@ -726,7 +726,9 @@ info_tpp();
 function info_tpp()
 {
    $.get("<?php echo base_url()?>index.php/getbynik/api_absen_by_nik?nik=<?php echo($this->session->userdata('NIK'))?>&bulan=<?php echo date('m')?>&tahun=<?php echo(date('Y'))?>",function(x){
-    console.log(x[0]);
+
+    console.log("<?php echo base_url()?>index.php/getbynik/api_absen_by_nik?nik=<?php echo($this->session->userdata('NIK'))?>&bulan=<?php echo date('m')?>&tahun=<?php echo(date('Y'))?>");
+
     var htm = '<ul class="products-list product-list-in-box">'+
                 '<li class="item"><a>Pokok </a> <span class="label label-primary pull-right">Rp.'+x[0].pokok+'</span> </li>'+
                 '<li class="item"><a>Ekinerja </a> <span class="label label-info pull-right">Rp.'+x[0].ekinerja+'</span></li>'+
@@ -738,6 +740,8 @@ function info_tpp()
     var hari_ini = x[0].kehadiran;
     var tgl = "<?php echo date('d-m-Y')?>";
     //var tgl = "09-04-2020";
+    console.log("hari_ini:");
+    console.log(hari_ini);
     var ada = "";
     var tidak_absen ="";
     $.each(hari_ini,function(a,b){
@@ -745,14 +749,18 @@ function info_tpp()
       if(b.tgl==tgl)
       {        
         ada = b.total_telat;
+        if(b.masuk==null && b.pulang==null)
+        {
+            tidak_absen="benar";
+        }
       }
 
-      if(b.masuk==null && b.pulang==null)
-      {
-          tidak_absen="benar";
-      }
+      
 
     })
+
+    console.log("tidak_absen="+tidak_absen);
+    console.log("ada="+ada);
 
     if(ada=="0" && tidak_absen=="")
     {
