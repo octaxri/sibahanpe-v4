@@ -305,7 +305,11 @@ include("part/menu_kiri.php");
                     {
                       $y="1%";
                       
-                    }else if($cepat_pulang >60)
+                    }else if($cepat_pulang >60 && $cepat_pulang<=90)
+                    {
+                      $y="1.25%";
+                    
+                    }else if($cepat_pulang >90)
                     {
                       $y="1.5%";
                     }
@@ -319,15 +323,19 @@ include("part/menu_kiri.php");
                     }else if($telat_masuk >30 && $telat_masuk<=60)
                     {
                       $x="1%";
+                              
+                    }else if($telat_masuk >60 && $telat_masuk<=90)
+                    {
+                      $x="1.25%";
                                     
-                    }else if($telat_masuk >60)
+                    }else if($telat_masuk >90)
                     {
                       $x="1.5%";
                     }
                     $potongan =$x;
                   }
                                     
-                                    $potongan=$x+$y;
+                  $potongan=$x+$y;
                 }
                                 /********** ijin hanya sebelah masuk atau pulang **************/
 
@@ -476,8 +484,8 @@ include("part/menu_kiri.php");
                 $style    = " class='warning' ";
                 $total_hadir++;
                 
-                $total_telat+=61;
-                $telat_masuk+=61;
+                $total_telat+=91;
+                $telat_masuk+=91;
                 
                 //nb:tidak absen pulang dianggap lebih dari 60menit
               
@@ -487,8 +495,8 @@ include("part/menu_kiri.php");
                 $potongan = "1.5%";
                 $style    = " class='warning' ";
                 $total_hadir++;               
-                $total_telat+=61;
-                $cepat_pulang +=61;
+                $total_telat+=91;
+                $cepat_pulang +=91;
                 //nb:tidak absen masuk dianggap lebih dari 60menit
               
               }else if($total_telat >0 && $total_telat <=30)
@@ -504,7 +512,13 @@ include("part/menu_kiri.php");
                 $style    = " class='warning' ";
                 $total_hadir++;
               
-              }else if($total_telat >60)
+              }else if($total_telat >60 && $total_telat <91 )
+              {
+                $potongan="1.25%";
+                $style    = " class='warning' ";
+                $total_hadir++;
+              
+              }else if($total_telat >90)
               {
                 $potongan="1.5%";
                 $style    = " class='warning' ";
@@ -548,8 +562,12 @@ include("part/menu_kiri.php");
                 }else if($cepat_pulang >30 && $cepat_pulang<=60)
                 {
                   $y="1%";
+
+                }else if($cepat_pulang >60 && $cepat_pulang<=61)
+                {
+                  $y="1.25%";
                   
-                }else if($cepat_pulang >60)
+                }else if($cepat_pulang >90)
                 {
                   $y="1.5%";
                 }
@@ -657,17 +675,7 @@ include("part/menu_kiri.php");
 			
 			<pre>
 			NB: 
-			- Tidak finger pulang atau masuk dianggap 61 menit terlambat
-			
-			- Terlambat 0-30 menit = 0,5%
-			- Terlambat >30-60 menit = 1%
-			- Terlambat >60 menit = 1,5%
-
-			- Cuti sakit > 3 hari potongan 2%
-			- Cuti Penting > 5 hari potongan 2%			
-			- Tidak hadir tanpa surat potongan 5%
-			- Tidak hadir tanpa keterangan > 4 hari TPP kehadiran 0
-			- Sakit potongan 2% 
+      <img src="https://sibahanpe.pakpakbharatkab.go.id/v4/perbub_2020.jpeg">
 			
             
             -----------------------PERUBAHAN PADA PERBUP TPP 2019---------------------

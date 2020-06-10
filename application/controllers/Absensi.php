@@ -123,7 +123,7 @@ class Absensi extends CI_Controller {
     	$data['hukuman'] = $a_hukuman;
     	//var_dump($a_hukuman);
     	/*---------admin_hukuman----------*/
-    
+     
     
 		
 		$this->load->view('template/index.php',$data);

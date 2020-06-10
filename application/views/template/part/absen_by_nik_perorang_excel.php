@@ -107,333 +107,350 @@ header('Content-Disposition: attachment; filename='.$filename);
 							{
 								
 							$no++;
-							$total_telat = $data->telat_masuk+$data->cepat_pulang;
-							
-							$jam_masuk = $data->jam_masuk==null?"<font color=red>-</font>":$data->jam_masuk;
-							$jam_keluar = $data->jam_keluar==null?"<font color=red>-</font>":$data->jam_keluar;
-							
-							$cepat_pulang = $data->cepat_pulang;
-							$telat_masuk = $data->telat_masuk;
-							
-							
-							$tanggal_get = $data->tanggal;
-							
-							$note	= "";
-							$style	= "";
-							$potongan ="0%";
+              $total_telat = $data->telat_masuk+$data->cepat_pulang;
+              
+              $jam_masuk = $data->jam_masuk==null?"<font color=red>-</font>":$data->jam_masuk;
+              $jam_keluar = $data->jam_keluar==null?"<font color=red>-</font>":$data->jam_keluar;
+              
+              $cepat_pulang = $data->cepat_pulang;
+              $telat_masuk = $data->telat_masuk;
+              
+              
+              $tanggal_get = $data->tanggal;
+              
+              $note = "";
+              $style  = "";
+              $potongan ="0%";
                                 
                             $info_baru ="";
                             
-							
-							//cek cuti tahunan 
-							if (in_array($tanggal_get, $d_cuttah)) 
-							{
-								$potongan	="0%";
-								$note		="keterangan";
-								$style		= " class='ijin_lain' ";
-								$tot_ijin_ket++;
-							
-							
-							//cek surat ijin lainnya 
-                            }else 
-							//cek surat ijin lainnya 
-							if (in_array($tanggal_get, $d_ijin_la)) 
-							{
-								/********** ijin hanya sebelah masuk atau pulang **************/
-								$yyy = $this->db->query("SELECT masuk_pulang FROM tbl_surat_ijin_keterangan WHERE NIK='$data->Nik' AND status='approve' AND tanggal='$tanggal_get'");
-								foreach ($yyy->result() as $o) {
-								
-									$note		="keterangan";
-									$style		= " class='ijin_lain' ";
+              
+              //cek cuti tahunan 
+              if (in_array($tanggal_get, $d_cuttah)) 
+              {
+                $potongan ="0%";
+                $note   ="keterangan";
+                $style    = " class='ijin_lain' ";
+                $tot_ijin_ket++;
+              
+              
+              //cek surat ijin lainnya 
+              }else 
+              //cek surat ijin lainnya 
+              if (in_array($tanggal_get, $d_ijin_la)) 
+              {
+                /********** ijin hanya sebelah masuk atau pulang **************/
+                $yyy = $this->db->query("SELECT masuk_pulang FROM tbl_surat_ijin_keterangan WHERE NIK='$data->Nik' AND status='approve' AND tanggal='$tanggal_get'");
+                foreach ($yyy->result() as $o) {
+                
+                  $note   ="keterangan";
+                  $style    = " class='ijin_lain' ";
                                     
                                     $x=0;
                                     $y=0;
-									if($o->masuk_pulang=='masuk')
-									{
-										$telat_masuk='0%';
+                  if($o->masuk_pulang=='masuk')
+                  {
+                    $telat_masuk='0%';
 
-										if($cepat_pulang>0 && $cepat_pulang<=30)
-										{
-											$y="0.5%";									
-											
-										}else if($cepat_pulang >30 && $cepat_pulang<=60)
-										{
-											$y="1%";
-											
-										}else if($cepat_pulang >60)
-										{
-											$y="1.5%";
-										}
-										$potongan	=$y;
-									}else{
-										$cepat_pulang='0%';
-										if($telat_masuk>0 && $telat_masuk<=30)
-										{
-											$x="0.5%";									
-											
-										}else if($telat_masuk >30 && $telat_masuk<=60)
-										{
-											$x="1%";
-											              
-										}else if($telat_masuk >60)
-										{
-											$x="1.5%";
-										}
-										$potongan	=$x;
-									}
+                    if($cepat_pulang>0 && $cepat_pulang<=30)
+                    {
+                      $y="0.5%";                  
+                      
+                    }else if($cepat_pulang >30 && $cepat_pulang<=60)
+                    {
+                      $y="1%";
+                      
+                    }else if($cepat_pulang >60 && $cepat_pulang<=90)
+                    {
+                      $y="1.25%";
+                    
+                    }else if($cepat_pulang >90)
+                    {
+                      $y="1.5%";
+                    }
+                    $potongan =$y;
+                  }else{
+                    $cepat_pulang='0%';
+                    if($telat_masuk>0 && $telat_masuk<=30)
+                    {
+                      $x="0.5%";                  
+                      
+                    }else if($telat_masuk >30 && $telat_masuk<=60)
+                    {
+                      $x="1%";
+                              
+                    }else if($telat_masuk >60 && $telat_masuk<=90)
+                    {
+                      $x="1.25%";
                                     
-                                    $potongan=$x+$y;
-								}
+                    }else if($telat_masuk >90)
+                    {
+                      $x="1.5%";
+                    }
+                    $potongan =$x;
+                  }
+                                    
+                  $potongan=$x+$y;
+                }
                                 /********** ijin hanya sebelah masuk atau pulang **************/
 
 
-								//$tot_ijin_ket++;
-							
-							//cek database cuti lain 2%
-							}else if (in_array($tanggal_get, $d_cutlain)) 
-							{
-								
-								//jika lebih dari 5 maka potongan 2 %
-								//jika tidak maka potongan 0%
-								
-                            	
-								$note		="cuti alasan penting";
-								$style		= " class='warning' ";
-								$tot_d_cutlain++;
+                //$tot_ijin_ket++;
+              
+              //cek database cuti lain 2%
+              }else if (in_array($tanggal_get, $d_cutlain)) 
+              {
+                
+                //jika lebih dari 5 maka potongan 2 %
+                //jika tidak maka potongan 0%
+                
+                              
+                $note   ="cuti alasan penting";
+                $style    = " class='warning' ";
+                $tot_d_cutlain++;
                             
-                            	if((count($d_cutlain)<=5) )
+                              if((count($d_cutlain)<=5) )
                                 {
-                                	
-									$potongan	="0%";	
+                                  
+                  $potongan ="0%";  
                                 }else if((count($d_cutlain)>5))
                                 {
-                                	if($tot_d_cutlain > 5)
+                                  if($tot_d_cutlain > 5)
                                     {
-                                    	$potongan	="2%";	
+                                      $potongan ="2%";  
                                     }
                                 }
                                 
                                 $info_baru ="2% dari Ekinerja";
                                 
-								
-							
-							//cek database cuti sakit 0%							
-							}else if (in_array($tanggal_get, $d_cutsak))
-							{
-								
-								$note		="sakit";
-								$style		= " class='warning' ";
-								$tot_cutsak++;
+                
+              
+              //cek database cuti sakit 0%              
+              }else if (in_array($tanggal_get, $d_cutsak))
+              {
+                
+                $note   ="sakit";
+                $style    = " class='warning' ";
+                $tot_cutsak++;
                             
-                            	
-                            	if((count($d_cutsak)<=3) )
+                              
+                              if((count($d_cutsak)<=3) )
                                 {
-                                	
-									$potongan	="0%";	
+                                  
+                  $potongan ="0%";  
                                 }else if((count($d_cutsak)>3))
                                 {
-                                	if($tot_cutsak > 3)
+                                  if($tot_cutsak > 3)
                                     {
-                                    	$potongan	="2%";	
+                                      $potongan ="2%";  
                                     }
                                 }
                                 
                                 $info_baru ="1% dari Ekinerja";
                                 
                             
-								/************* INGAT ********cek sakit adalah ket.sah *******************/
-							}else if (in_array($tanggal_get, $d_sakit)) 
-							{
-								
-								
-								//$total_absen++;
-								
-                            	//$note		="sakit";
-								//$style		= " class='warning' ";
-								
-                            	/*
-                            	if((count($d_sakit)<=3) )
+                /************* INGAT ********cek sakit adalah ket.sah *******************/
+              }else if (in_array($tanggal_get, $d_sakit)) 
+              {
+                
+                
+                //$total_absen++;
+                
+                              //$note   ="sakit";
+                //$style    = " class='warning' ";
+                
+                              /*
+                              if((count($d_sakit)<=3) )
                                 {
-                                	
-									$potongan	="0%";	
+                                  
+                  $potongan ="0%";  
                                 }else if((count($d_sakit)>3))
                                 {
-                                	if($tot_cutsak > 3)
+                                  if($tot_cutsak > 3)
                                     {
-                                    	$potongan	="2%";	
+                                      $potongan ="2%";  
                                     }
                                 }
                                 */
 
 
                                 /*
-								
-                                $note		="sakit";
-								$style		= " class='warning' ";
-								$tot_cutsak++;
+                
+                                $note   ="sakit";
+                $style    = " class='warning' ";
+                $tot_cutsak++;
                             
-                            	
-                            	if((count($d_sakit)<=3) )
+                              
+                              if((count($d_sakit)<=3) )
                                 {
-                                	
-									$potongan	="0%";	
+                                  
+                  $potongan ="0%";  
                                 }else if((count($d_sakit)>3))
                                 {
-                                	if($tot_cutsak > 3)
+                                  if($tot_cutsak > 3)
                                     {
-                                    	$potongan	="2%";	
+                                      $potongan ="2%";  
                                     }
                                 }
-                            	*/
+                              */
 
-                            	$tot_ijin_ket++;
-                            	$potongan	="2%";	
+                              $tot_ijin_ket++;
+                              $potongan ="2%";  
                                 
-                                $note		="sakit";
-								$style		= " class='warning' ";
-								$tot_cutsak++;
+                                $note   ="sakit";
+                $style    = " class='warning' ";
+                $tot_cutsak++;
                                 $info_baru ="1% dari Ekinerja";
                                 
-								//cek dinas luar
-							}else if (in_array($tanggal_get, $d_dinas)) 
-							{
-								$potongan	="0%";
-								$note		="dinas";
-								$style		= " class='info' ";								
-								$tot_dinas_luar++;
-								
-								//cek database libur
-							}else if (in_array($tanggal_get, $d_libur)) 
-							{
-								$potongan	="0%";
-								$note		="libur";
-								$style		= " class='info' ";
-								
-							}else if($data->jam_masuk==null && $data->jam_keluar==null)
-							{
-								
-								//tanpa alasan
-								
-								$potongan	= "0%";
-								
-								$style		= " class='danger' ";
-								
-								$total_absen++;
+                //cek dinas luar
+              }else if (in_array($tanggal_get, $d_dinas)) 
+              {
+                $potongan ="0%";
+                $note   ="dinas";
+                $style    = " class='info' ";               
+                $tot_dinas_luar++;
+                
+                //cek database libur
+              }else if (in_array($tanggal_get, $d_libur)) 
+              {
+                $potongan ="0%";
+                $note   ="libur";
+                $style    = " class='info' ";
+                
+              }else if($data->jam_masuk==null && $data->jam_keluar==null)
+              {
+                
+                //tanpa alasan
+                
+                $potongan = "0%";
+                
+                $style    = " class='danger' ";
+                
+                $total_absen++;
                                 
                                 $info_baru = "4% dari TPP";
-								
-								
-							
-							}else if($data->jam_masuk==null && $data->jam_keluar!=null)
-							{
-																
-								$potongan	= "1.5%";
-								$style		= " class='warning' ";
-								$total_hadir++;
-								
-								$total_telat+=61;
-								$telat_masuk+=61;
-								
-								//nb:tidak absen pulang dianggap lebih dari 60menit
-							
-							}else if($data->jam_masuk!=null && $data->jam_keluar==null)
-							{
-																
-								$potongan	= "1.5%";
-								$style		= " class='warning' ";
-								$total_hadir++;								
-								$total_telat+=61;
-								$cepat_pulang +=61;
-								//nb:tidak absen masuk dianggap lebih dari 60menit
-							
-							}else if($total_telat >0 && $total_telat <=30)
-							{
-								$potongan="0.5%";
-								$style		= " class='warning' ";
-								$total_hadir++;
-								
-								
-							}else if($total_telat >30 && $total_telat <61 )
-							{
-								$potongan="1%";
-								$style		= " class='warning' ";
-								$total_hadir++;
-							
-							}else if($total_telat >60)
-							{
-								$potongan="1.5%";
-								$style		= " class='warning' ";
-								$total_hadir++;
-							
-							}else{
-								$potongan="0%";
-								$style		= " class='' ";
-								$total_hadir++;
-							
-							}
-							
+                
+                
+              
+              }else if($data->jam_masuk==null && $data->jam_keluar!=null)
+              {
+                                
+                $potongan = "1.5%";
+                $style    = " class='warning' ";
+                $total_hadir++;
+                
+                $total_telat+=91;
+                $telat_masuk+=91;
+                
+                //nb:tidak absen pulang dianggap lebih dari 60menit
+              
+              }else if($data->jam_masuk!=null && $data->jam_keluar==null)
+              {
+                                
+                $potongan = "1.5%";
+                $style    = " class='warning' ";
+                $total_hadir++;               
+                $total_telat+=91;
+                $cepat_pulang +=91;
+                //nb:tidak absen masuk dianggap lebih dari 60menit
+              
+              }else if($total_telat >0 && $total_telat <=30)
+              {
+                $potongan="0.5%";
+                $style    = " class='warning' ";
+                $total_hadir++;
+                
+                
+              }else if($total_telat >30 && $total_telat <61 )
+              {
+                $potongan="1%";
+                $style    = " class='warning' ";
+                $total_hadir++;
+              
+              }else if($total_telat >60 && $total_telat <91 )
+              {
+                $potongan="1.25%";
+                $style    = " class='warning' ";
+                $total_hadir++;
+              
+              }else if($total_telat >90)
+              {
+                $potongan="1.5%";
+                $style    = " class='warning' ";
+                $total_hadir++;
+              
+              }else{
+                $potongan="0%";
+                $style    = " class='' ";
+                $total_hadir++;
+              
+              }
+              
                             
                             
 
-							/***************** solusi untuk persen dijumlahkan *****************/
-							if($telat_masuk>0 && $cepat_pulang>0)
-							{
-								$x =0;
-								$y =0;
+              /***************** solusi untuk persen dijumlahkan *****************/
+              if($telat_masuk>0 && $cepat_pulang>0)
+              {
+                $x =0;
+                $y =0;
 
-								
-								
-								if($telat_masuk>0 && $telat_masuk<=30)
-								{
-									$x="0.5%";									
-									
-								}else if($telat_masuk >30 && $telat_masuk<=60)
-								{
-									$x="1%";
-									
-								}else if($telat_masuk >60)
-								{
-									$x="1.5%";
-								}
+                
+                
+                if($telat_masuk>0 && $telat_masuk<=30)
+                {
+                  $x="0.5%";                  
+                  
+                }else if($telat_masuk >30 && $telat_masuk<=60)
+                {
+                  $x="1%";
+                  
+                }else if($telat_masuk >60)
+                {
+                  $x="1.5%";
+                }
 
-								if($cepat_pulang>0 && $cepat_pulang<=30)
-								{
-									$y="0.5%";									
-									
-								}else if($cepat_pulang >30 && $cepat_pulang<=60)
-								{
-									$y="1%";
-									
-								}else if($cepat_pulang >60)
-								{
-									$y="1.5%";
-								}
-								$potongan = $x+$y;
-								$potongan = $potongan."%";
-							
-							}
-							/***************** solusi untuk persen dijumlahkan *****************/
+                if($cepat_pulang>0 && $cepat_pulang<=30)
+                {
+                  $y="0.5%";                  
+                  
+                }else if($cepat_pulang >30 && $cepat_pulang<=60)
+                {
+                  $y="1%";
+
+                }else if($cepat_pulang >60 && $cepat_pulang<=61)
+                {
+                  $y="1.25%";
+                  
+                }else if($cepat_pulang >90)
+                {
+                  $y="1.5%";
+                }
+                $potongan = $x+$y;
+                $potongan = $potongan."%";
+              
+              }
+              /***************** solusi untuk persen dijumlahkan *****************/
                             
                             /******penyelesaian masalah*****/
                             $hukumannya = $this->m_absensi->m_hukuman($nik,$tanggal_get);
                             
                             if(count($hukumannya)>0)
                             {
-                            	$potongan=$hukumannya[0]->hukuman."%";
-								$style		= " class='hukuman'";
-                            	
-                            	$arr_hukuman[] = $hukumannya[0];
+                              $potongan=$hukumannya[0]->hukuman."%";
+                $style    = " class='hukuman'";
+                              
+                              $arr_hukuman[] = $hukumannya[0];
                             }
                             
                             /******penyelesaian masalah*****/
                             
                             
-							
-							$total_pot+=$potongan;
-							
-							
-							$tot_telat_masuk+=$total_telat;
-							
+              
+              $total_pot+=$potongan;
+              
+              
+              $tot_telat_masuk+=$total_telat;
 							
 							echo "
 								<tr $style>
