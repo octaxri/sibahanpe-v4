@@ -358,6 +358,17 @@ class Api extends CI_Controller {
 	
     
     
+
+	public function gps_lolos()
+	{
+	   
+		$q = $this->db->query("SELECT * FROM  `tbl_gps_lolos` ");
+        $qq = $q->result();
+        
+        echo json_encode($qq);
+        
+	}
+	
     
 	
 	
