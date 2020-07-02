@@ -129,11 +129,11 @@ table tr td, th  {
 							//pph 21
 							if(trim($data->golongan)=='III')
 							{
-								$pph = round($tpp->pokok*5/100);
+								$pph = round($tpp->total_dapat*5/100);
 							
 							}else if(trim($data->golongan)=='IV')
 							{
-								$pph = round($tpp->pokok*15/100);							
+								$pph = round($tpp->total_dapat*15/100);							
 								
 							}else if(trim($data->golongan)=='II')
 							{

@@ -75,7 +75,7 @@ class Absensi extends CI_Controller {
 		if(count($this->m_absensi->ambil_gambar($fid))>0)
 		{
 			//$data['gambar'] = base_url().$this->m_absensi->ambil_gambar($fid)[0]->image;
-			$data['gambar'] = "https://sibahanpe.pakpakbharatkab.go.id/sibahanpe/".$this->m_absensi->ambil_gambar($fid)[0]->image;
+			$data['gambar'] = base_url().$this->m_absensi->ambil_gambar($fid)[0]->image;
 		}else{
 			$data['gambar'] = "https://sibahanpe.pakpakbharatkab.go.id/sibahanpe/assets/dist/img/avatar5.png";
 		}
