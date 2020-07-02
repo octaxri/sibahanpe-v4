@@ -65,6 +65,7 @@ header('Content-Type: application/json');
                 
                 		$tot_d_cutlain = 0;
 						
+                    $arr_hukuman=array();
 					
 							foreach($hasil as $data)
 							{
@@ -83,10 +84,10 @@ header('Content-Type: application/json');
 							
 							$note	= "";
 							$style	= "";
-                            $potongan	="0%";	
+              $potongan	="0%";	
+                            
+                            $info_baru ="";
 						
-
-							
 							
 							//cek cuti tahunan 
 							if (in_array($tanggal_get, $d_cuttah)) 
@@ -98,18 +99,12 @@ header('Content-Type: application/json');
 							
 							
 							//cek surat ijin lainnya 
-                            }else 
+              }else 
 							//cek surat ijin lainnya 
 							if (in_array($tanggal_get, $d_ijin_la)) 
 							{
-                                /*
-								$potongan	="0%";
-								$note		="keterangan";
-								$style		= " class='ijin_lain' ";
-								$tot_ijin_ket++;
-                                */
-                                /********** ijin hanya sebelah masuk atau pulang **************/
-								$yyy = $this->db->query("SELECT masuk_pulang FROM tbl_surat_ijin_keterangan WHERE NIK='$nik' AND status='approve' AND tanggal='$tanggal_get'");
+                /********** ijin hanya sebelah masuk atau pulang **************/
+$yyy = $this->db->query("SELECT masuk_pulang FROM tbl_surat_ijin_keterangan WHERE NIK='$data->Nik' AND status='approve' AND tanggal='$tanggal_get'");
 								foreach ($yyy->result() as $o) {
 								
 									$note		="keterangan";
