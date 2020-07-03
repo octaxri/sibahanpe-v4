@@ -389,7 +389,7 @@ table tr td, th  {
                 
                 $total_absen++;
                                 
-                                $info_baru = "4% dari TPP";
+                                $info_baru = "3% dari TPP";
                 
                 
               
@@ -575,7 +575,7 @@ table tr td, th  {
 					$setelah_dipotong_absen = round($persen_absen*$total_pot/100);
 
                     
-					$potong_perbub_baru = ($tpp*($total_absen*4)/100);
+					$potong_perbub_baru = ($tpp*($total_absen*3)/100);
                     $potong_perbub_baru_sakit = ($tpp_dasar_e*($tot_cutsak*1)/100);
                     $potong_perbub_baru_cuti_lain = ($tpp_dasar_e*($tot_d_cutlain*2)/100);
                             
@@ -641,7 +641,7 @@ table tr td, th  {
 					echo "<div class='col-xs-3'>POTONGAN ABSEN </div><div class='col-xs-3'>: ".rupiah($setelah_dipotong_absen)."</div><div style='clear:both'></div>";
 					echo "<hr>";
                             
-					echo "<div class='col-xs-3'>POTONGAN TPP </div><div class='col-xs-3'>: ".rupiah($potong_perbub_baru)." (".($total_absen*4)." % dari TPP)</div><div style='clear:both'></div>";
+					echo "<div class='col-xs-3'>POTONGAN TPP </div><div class='col-xs-3'>: ".rupiah($potong_perbub_baru)." (".($total_absen*3)." % dari TPP)</div><div style='clear:both'></div>";
 					
                     echo "<hr>";
                     				

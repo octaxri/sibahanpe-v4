@@ -457,7 +457,7 @@ $yyy = $this->db->query("SELECT masuk_pulang FROM tbl_surat_ijin_keterangan WHER
 					$setelah_dipotong_absen = round($persen_absen*$total_pot/100);
 
                     
-					$potong_perbub_baru = ($tpp*($total_absen*4)/100);
+					          $potong_perbub_baru = ($tpp*($total_absen*3)/100);
                     $potong_perbub_baru_sakit = ($tpp_dasar_e*($tot_cutsak*1)/100);
                     $potong_perbub_baru_cuti_lain = ($tpp_dasar_e*($tot_d_cutlain*2)/100);
                             
@@ -480,8 +480,10 @@ $yyy = $this->db->query("SELECT masuk_pulang FROM tbl_surat_ijin_keterangan WHER
             "bulan"=>$bulan,
             "pokok"=>$tpp,
             "ekinerja"=>$tpp_dapat_e,
-            "kehadiran"=>$hasil_exclude_ekinerja,
+            "absensi"=>$hasil_exclude_ekinerja,
+            "potong_perbub_baru"=>$potong_perbub_baru,
             "persen_pot_absen"=>$total_pot,
+            "potongan_absen"=>$setelah_dipotong_absen,
             "total"=>$hasil_akhir,
             "kehadiran"=>$array_tanggal    
             );

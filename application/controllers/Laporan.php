@@ -98,6 +98,7 @@ class Laporan extends CI_Controller {
 						"total_dapat"=>round($absensi[0]->total),
 						"dapat_ekin"=>round($hasil->tpp_dapat),
 						"dapat_absen"=>round($absensi[0]->total) - round($hasil->tpp_dapat),
+						"potong_perbub_baru"=>$absensi[0]->potong_perbub_baru,
 						"pokok"=>$hasil->tpp_full
 						);		
 			$this->db->insert('tbl_hasil_absen',$ser_absensi);
@@ -129,6 +130,7 @@ class Laporan extends CI_Controller {
 
 
 		$url_absensi = base_url()."index.php/getbynik/api_absen_by_nik?nik=$nip&bulan=$bulan&tahun=$tahun";
+
 		$absensi = json_decode(exec_url($url_absensi));
 		$ser_absensi = array(
 					"nip"=>$nip,
@@ -137,6 +139,7 @@ class Laporan extends CI_Controller {
 					"total_dapat"=>round($absensi[0]->total),
 					"dapat_ekin"=>round($hasil->tpp_dapat),
 					"dapat_absen"=>round($absensi[0]->total) - round($hasil->tpp_dapat),
+					"potong_perbub_baru"=>$absensi[0]->potong_perbub_baru,
 					"pokok"=>$hasil->tpp_full
 					);		
 		$this->db->insert('tbl_hasil_absen',$ser_absensi);

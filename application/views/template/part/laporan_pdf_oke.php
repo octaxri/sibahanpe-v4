@@ -108,6 +108,8 @@ table tr td, th  {
 							$tpp->total_dapat = $tpp->total_dapat<=0?0:$tpp->total_dapat;
 							$tpp->dapat_absen = $tpp->dapat_absen<=0?0:$tpp->dapat_absen;
 							$tpp->dapat_ekin = $tpp->dapat_ekin<=0?0:$tpp->dapat_ekin;
+							$potong_perbub_baru = $tpp->potong_perbub_baru<=0?0:$tpp->potong_perbub_baru;
+                            
 							$pph=0;
 							$bersih=0;
 							
@@ -124,7 +126,6 @@ table tr td, th  {
                             }                            
                             /************ pengecualian given ********************/
                             
-                            $potong_perbub_baru = $tpp->pokok-$tpp->total_dapat;
                             
 							//pph 21
 							if(trim($data->golongan)=='III')

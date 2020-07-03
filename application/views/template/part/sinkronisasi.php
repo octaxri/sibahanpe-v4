@@ -196,7 +196,9 @@
 	$("#form_sync").on("submit",function(){
 			$("#t4_info").html("<div class='alert alert-info' style='padding:5px'>Loading mohon tunggu, sedang menarik data Ekinerja...</div>");
 			$("#btn_go").fadeOut();
+			var link = "<?php echo base_url()?>index.php/laporan/go_sinkron?"+$(this).serialize();
 			$.get("<?php echo base_url()?>index.php/laporan/go_sinkron",$(this).serialize(),function(e){
+				console.log(link);
 				console.log(e);
 				$("#t4_info").html("<div class='alert alert-success'>Data berhasil ditarik.</div>");
 			})
@@ -210,6 +212,7 @@
 			$("#btn_go_all").fadeOut();
 			$.get("<?php echo base_url()?>index.php/laporan/go_sinkron_all",$(this).serialize(),function(e){
 				console.log(e);
+				console.log("<?php echo base_url()?>index.php/laporan/go_sinkron_all"+$(this).serialize());
 				$("#t4_info_all").html("<div class='alert alert-success'>Data berhasil ditarik.</div>");
 			})
 		return false;
