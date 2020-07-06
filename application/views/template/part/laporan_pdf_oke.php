@@ -171,7 +171,7 @@ table tr td, th  {
 									<td>$data->npwp</td>
 									<td align='right'>".rupiah($tpp->pokok)."</td>
                                     <td align='right'>".rupiah($tpp->dapat_ekin)."</td>
-									<td align='right'>".rupiah($tpp->dapat_absen)."</td>
+									<td align='right'>".rupiah($tpp->dapat_absen + $potong_perbub_baru)."</td>
                                     <td align='right'>".rupiah($potong_perbub_baru)."</td>
 									<td align='right'>".rupiah($tpp->total_dapat)."</td>									
 									<td align='right'>".rupiah($pph)."</td>
