@@ -138,7 +138,7 @@ class Laporan extends CI_Controller {
 					"tahun"=>$tahun,
 					"total_dapat"=>round($absensi[0]->total),
 					"dapat_ekin"=>round($hasil->tpp_dapat),
-					"dapat_absen"=>round($absensi[0]->total) - round($hasil->tpp_dapat),
+					"dapat_absen"=>round($absensi[0]->absensi),
 					"potong_perbub_baru"=>$absensi[0]->potong_perbub_baru,
 					"pokok"=>$hasil->tpp_full
 					);		
